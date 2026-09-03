@@ -6,11 +6,6 @@ canvas.height = window.innerHeight;
 //accesing canva context 
 const c = canvas.getContext("2d");
 
-//Audio import 
-const firing = new Audio("./sound/ahmed_abdulaal-laser-312360.mp3");
-const collisonAudio = new Audio("./sound/freesound_community-rock-destroy-6409.mp3");
-const enemyDesAudio = new Audio("./sound/khoamthanh-kick-bright-medium-504170.mp3");
-
 //player class for creting the enmy player and fragments
 class BluePrint{
     constructor({
@@ -151,11 +146,6 @@ addEventListener("click",(e)=> {
         color,
     })
 
-    if(isallowed){
-        const inst = firing.cloneNode();
-        inst.volume = 0.2;
-        inst.play();
-    }
     bullets.push(bullet);
 })
 //main loop for rendering everthing
@@ -175,7 +165,6 @@ function anime(){
         //checking for collison between enemy and and player for ending game 
         if(Math.hypot((enemy.position.x - player.position.x),(enemy.position.y - player.position.y)) <= enemy.radius + player.radius){
             //game over
-            collisonAudio.play();
             //stopping all the randering
             cancelAnimationFrame(frame);
             onCollision();
@@ -212,7 +201,6 @@ function anime(){
                 //it is used to remove the enemy when they shrink below certain radius
                 setTimeout(() =>{
                     if(enemy.radius <= 20){
-                        enemyDesAudio.play();
                         enemies.splice(enemyIndex,1);
 
                         //setting the score when ever enemy is destroyed
